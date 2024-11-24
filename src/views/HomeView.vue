@@ -7,34 +7,48 @@ import { ref } from 'vue';
 
 const modalIsOpen = ref<boolean>(false);
 const mockStore = useMockStore();
+const selectedFolderId = ref<number | null>(null);
 
 const onConfirm = () => {
   modalIsOpen.value = false;
+  mockStore.setSelectedFileId(selectedFolderId.value);
 };
 
-const onSelect = (e: Event) => {
-  modalIsOpen.value = false;
-  console.log(e);
+const onOpenModal = () => {
+  modalIsOpen.value = true;
+  selectedFolderId.value = null;
 };
 </script>
 
 <template>
-  <div class="text-3xl mx-auto text-center">
-    <UIButton text="Открыть" @click="modalIsOpen = true" />
+  <div class="home">
+    <UIButton text="Открыть" @click="onOpenModal" />
+
+    <div>
+      {{
+        mockStore.getSelectedFileId()
+          ? `ID выбранного файла: ${mockStore.getSelectedFileId()}`
+          : 'Файл не выбран'
+      }}
+    </div>
 
     <teleport to="body">
       <Transition name="fade">
         <UIModal
           v-if="modalIsOpen"
-          title="Выбор файла"
+          title="Выбор папки"
           @close="modalIsOpen = false"
           @confirm="onConfirm"
         >
-          <UITreeView :data="mockStore.getData()" @select="onSelect" />
+          <UITreeView :data="mockStore.getData()" v-model="selectedFolderId" />
         </UIModal>
       </Transition>
     </teleport>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.home {
+  @apply text-3xl mx-auto text-center flex flex-col items-center;
+}
+</style>
