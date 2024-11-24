@@ -1,3 +1,5 @@
 import Main from './Main.vue';
 
-export default Main;
+const UITreeView = Main as typeof Main;
+
+export default UITreeView;
