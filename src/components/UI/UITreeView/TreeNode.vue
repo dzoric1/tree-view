@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ChevronIcon from '@/components/icons/ChevronIcon.vue';
-import { computed, defineEmits, defineProps, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { type TreeNodeData } from './types';
 
 const props = defineProps<{
