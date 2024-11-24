@@ -18,5 +18,7 @@ export const useMockStore = defineStore('mock', () => {
     { id: 5, name: 'Папка 2', children: [] },
   ]);
 
-  return { data };
+  const getData = () => data.value;
+
+  return { data, getData };
 });
