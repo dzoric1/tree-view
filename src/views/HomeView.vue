@@ -28,7 +28,7 @@ const onOpenModal = () => {
       {{
         mockStore.getSelectedFileId()
           ? `ID выбранной папки: ${mockStore.getSelectedFileId()}`
-          : 'Файл не выбран'
+          : 'Папка не выбрана'
       }}
     </div>
 
