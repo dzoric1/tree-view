@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import UIButton from '@/components/UI/UIButton.vue';
 import UiModal from '@/components/UI/UIModal.vue';
 import { ref } from 'vue';
 
@@ -7,7 +8,7 @@ const modalIsOpen = ref<boolean>(false);
 
 <template>
   <div class="text-3xl mx-auto text-center">
-    <button @click="modalIsOpen = !modalIsOpen">Открыть модальное окно</button>
+    <UIButton text="Открыть диалоговое окно" @click="modalIsOpen = true" />
 
     <teleport to="body">
       <Transition name="fade">
