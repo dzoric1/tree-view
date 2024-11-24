@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import XMarkIcon from '@/components/icons/XmarkIcon.vue';
+import UIButton from './UIButton.vue';
 
 type Props = {
   title: string;
@@ -7,10 +8,17 @@ type Props = {
 
 type Emits = {
   (event: 'close'): void;
+  (event: 'confirm'): void;
+  // (event: 'confirm', payload?: unknown): void;
 };
 
-defineEmits<Emits>();
+const emits = defineEmits<Emits>();
 defineProps<Props>();
+
+const onConfirm = () => {
+  emits('confirm');
+  emits('close');
+};
 </script>
 
 <template>
@@ -21,6 +29,10 @@ defineProps<Props>();
       <button class="modal__close-icon" @click="$emit('close')">
         <XMarkIcon />
       </button>
+      <div class="modal__buttons">
+        <UIButton text="OK" @click="onConfirm" />
+        <UIButton text="Закрыть" @click="$emit('close')" />
+      </div>
     </div>
   </div>
 </template>
@@ -40,5 +52,9 @@ defineProps<Props>();
 
 .modal__close-icon {
   @apply absolute top-2 right-2;
+}
+
+.modal__buttons {
+  @apply flex items-center justify-center gap-2 mt-2;
 }
 </style>
